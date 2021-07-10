@@ -2,7 +2,7 @@ version: "3.8"
 services:
     srs:
         #image: ossrs/srs:v4.0.136
-        #image: 76527413/srs
+        #image: 76527413/srs:amd64
         image: 76527413/srs:arm64
         environment:
             - CANDIDATE=*
