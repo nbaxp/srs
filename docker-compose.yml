@@ -2,8 +2,8 @@ version: "3.8"
 services:
     srs:
         #image: ossrs/srs:v4.0.136
-        #image: 76527413/srs:amd64
-        image: 76527413/srs:arm64
+        image: 76527413/srs:amd64
+        #image: 76527413/srs:arm64
         environment:
             - CANDIDATE=*
         ports:
@@ -13,7 +13,7 @@ services:
             - 8000:8000/udp
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./conf:/usr/local/srs/conf
+            - ./conf/example:/usr/local/srs/conf
             - ./tmp/srs:/usr/local/srs/objs/nginx/html/live
     ffmpeg:
         image: jrottenberg/ffmpeg:4.1-ubuntu1804

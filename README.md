@@ -9,7 +9,7 @@
 
 ## 截图无法自动创建路径的问题
 
-通过配置 hls_ts_file 或 dvr_path 简介创建
+通过配置 hls_ts_file 或 dvr_path 间接创建
 
 ## dvr_path
 
@@ -35,7 +35,7 @@ srs dvr 路径可以使用变量，[vhost] [app] [stream] [timestamp] 正常使�
 
 ### 直播场景
 
-自动录像、按会话存储，也可以按照时间分割
+自动录像、按会话存储，也可以按时间分割
 
 ```
     dvr {
