@@ -1,10 +1,10 @@
 
 ARG BUILD_IMAGE=ossrs/srs:aarch64
 ARG IMAGE=arm64v8/ubuntu:18.04
-ARG BTANCH=4.0release
 
 FROM multiarch/qemu-user-static:x86_64-aarch64 as qemu
 FROM $BUILD_IMAGE as build
+ARG BTANCH=4.0release
 COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
 
 RUN sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \

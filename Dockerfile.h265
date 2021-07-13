@@ -1,8 +1,8 @@
 ARG BUILD_IMAGE=ossrs/srs:dev
 ARG DIST_IMAGE=ubuntu:18.04
-ARG BTANCH=feature/h265
 
 FROM $BUILD_IMAGE as build
+ARG BTANCH=feature/h265
 
 RUN yum install -y git 
 

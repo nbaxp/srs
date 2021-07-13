@@ -1,8 +1,8 @@
 ARG BUILD_IMAGE=ossrs/srs:dev
 ARG IMAGE=ubuntu:18.04
-ARG BTANCH=4.0release
 
 FROM $BUILD_IMAGE as build
+ARG BTANCH=4.0release
 
 RUN yum install -y git
 

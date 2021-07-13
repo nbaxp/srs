@@ -1,8 +1,8 @@
 ARG BUILD_IMAGE=ossrs/srs:dev
 ARG DIST_IMAGE=ubuntu:18.04
-ARG BTANCH=feature/gb28181
 
 FROM $BUILD_IMAGE as build
+ARG BTANCH=feature/gb28181
 
 RUN yum install -y git 
 
