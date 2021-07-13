@@ -1,21 +1,23 @@
+
+ARG BUILD_IMAGE=ossrs/srs:aarch64
+ARG IMAGE=arm64v8/ubuntu:18.04
+ARG BTANCH=4.0release
+
 FROM multiarch/qemu-user-static:x86_64-aarch64 as qemu
-
-FROM ossrs/srs:aarch64 as build
-
+FROM $BUILD_IMAGE as build
 COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
 
 RUN sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \
     sed -i s/security.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \
     apt update -qqy && \
     apt install -y git
-RUN git clone --depth 1 -b 4.0release https://github.com/ossrs/srs.git
+RUN git clone --depth 1 -b $BTANCH https://github.com/ossrs/srs.git
 RUN cd srs/trunk && ./configure && make
 
-FROM arm64v8/ubuntu:18.04
+FROM $IMAGE
+COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
 
 LABEL org.opencontainers.image.authors="76527413@qq.com"
-
-COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
 
 RUN sed -i s/ports.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \
     apt update -y && \
@@ -39,4 +41,3 @@ COPY --from=build /tmp/srs/srs/trunk/3rdparty/signaling/www/demos  ./objs/nginx/
 COPY --from=build /usr/local/bin/ffmpeg ./objs/ffmpeg/bin/ffmpeg
 
 CMD ./objs/srs -c ./conf/srs.conf
-

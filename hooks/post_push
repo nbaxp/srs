@@ -5,4 +5,3 @@ for tag in {$TAG.$VERSION,$TAG.$(git rev-parse --short HEAD),$TAG.$(date -u +"%Y
     docker tag $IMAGE_NAME $DOCKER_REPO:$tag
     docker push $DOCKER_REPO:$tag
 done
-docker rmi $DOCKER_REPO:$DOCKER_TAG
