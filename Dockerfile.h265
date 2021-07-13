@@ -1,17 +1,17 @@
 ARG BUILD_IMAGE=ossrs/srs:dev
-ARG DIST_IMAGE=ubuntu:18.04
+ARG IMAGE=ubuntu:18.04
 
 FROM $BUILD_IMAGE as build
-ARG BTANCH=feature/h265
+ARG BRANCH=feature/h265
 
 RUN yum install -y git 
 
 ##h265:https://github.com/ossrs/srs/issues/2053
-RUN git clone --depth 1 -b $BTANCH https://github.com/ossrs/srs.git
+RUN git clone --depth 1 -b $BRANCH https://github.com/ossrs/srs.git
 RUN cd srs && sed -i '1455s#vcodec->NAL_unit_length#nal_len_size#' ./trunk/src/kernel/srs_kernel_codec.cpp
 RUN cd srs/trunk && ./configure && make
 
-FROM $DIST_IMAGE
+FROM $IMAGE
 
 LABEL org.opencontainers.image.authors="76527413@qq.com"
 

@@ -1,16 +1,16 @@
 ARG BUILD_IMAGE=ossrs/srs:dev
-ARG DIST_IMAGE=ubuntu:18.04
+ARG IMAGE=ubuntu:18.04
 
 FROM $BUILD_IMAGE as build
-ARG BTANCH=feature/gb28181
+ARG BRANCH=feature/gb28181
 
 RUN yum install -y git 
 
 ##gb28181:https://github.com/ossrs/srs/issues/1500#issue-528623588
-RUN git clone --depth 1 -b $BTANC https://github.com/ossrs/srs.git
+RUN git clone --depth 1 -b $BRANCH https://github.com/ossrs/srs.git
 RUN cd srs/trunk && ./configure --with-gb28181 && make
 
-FROM $DIST_IMAGE
+FROM $IMAGE
 
 LABEL org.opencontainers.image.authors="76527413@qq.com"
 

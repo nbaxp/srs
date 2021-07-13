@@ -2,12 +2,12 @@ ARG BUILD_IMAGE=ossrs/srs:dev
 ARG IMAGE=ubuntu:18.04
 
 FROM $BUILD_IMAGE as build
-ARG BTANCH=4.0release
+ARG BRANCH=4.0release
 
 RUN yum install -y git
 
 ##release 4.0
-RUN git clone --depth 1 -b $BTANCH https://github.com/ossrs/srs.git
+RUN git clone --depth 1 -b $BRANCH https://github.com/ossrs/srs.git
 RUN cd srs/trunk && ./configure && make
 
 FROM $IMAGE
