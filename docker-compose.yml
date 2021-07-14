@@ -2,19 +2,32 @@ version: "3.8"
 services:
     srs:
         #image: ossrs/srs:v4.0.136
-        image: 76527413/srs:amd64
+        #image: 76527413/srs:amd64
         #image: 76527413/srs:arm64
+        #image: 76527413/srs:gb28181
+        image: 76527413/srs:h265
         environment:
-            - CANDIDATE=*
+            - CANDIDATE=192.168.100.144
         ports:
             - 1935:1935
-            - 8080:8080
             - 1985:1985
+            #- 1990:1990
+            - 8080:8080
+            #- 8088:8088
             - 8000:8000/udp
+            - 1980:1980/udp
+            - 8935:8935/udp
+            - 554:554
+            - 8936:8936
+            - 5060:5060/udp
+            - 9000:9000/udp
+            - 58200-58300:58200-58300/udp
+            - 10080:10080/udp
         volumes:
             - /etc/localtime:/etc/localtime:ro
-            - ./conf/example:/usr/local/srs/conf
-            - ./tmp/srs:/usr/local/srs/objs/nginx/html/live
+            #- ./conf/example:/usr/local/srs/conf
+            - ./conf/gb28181:/usr/local/srs/conf
+            #- ./tmp/srs:/usr/local/srs/objs/nginx/html/live
     ffmpeg:
         image: jrottenberg/ffmpeg:4.1-ubuntu1804
         volumes:
