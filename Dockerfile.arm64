@@ -9,7 +9,7 @@ COPY --from=qemu /usr/bin/qemu-aarch64-static /usr/bin
 
 RUN sed -i s/archive.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \
     sed -i s/security.ubuntu.com/mirrors.ustc.edu.cn/g /etc/apt/sources.list && \
-    apt update -qqy && \
+    apt update -y && \
     apt install -y git
 RUN git clone --depth 1 -b $BRANCH https://github.com/ossrs/srs.git
 RUN cd srs/trunk && ./configure && make
